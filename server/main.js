@@ -27,7 +27,123 @@ io.on('connection', function(socket)
 	socket.on('disconnect', function(){
 		console.log('Alguien se ha desconectado');
 	});
-	/*Pagos y tramites*/
+	/*Pagos*/
+	socket.on('pago',function(imprimir){
+		console.log('Creando PDF: '+ imprimir);
+		
+		var myDoc = new pdf;
+		myDoc.pipe(fs.createWriteStream('node.pdf'));
+		
+		myDoc.font("Times-Roman",12)
+			.image('img/logo_aguaa.png',75,10,{
+				 width: 60, 
+				 height: 60
+			})
+
+			.moveDown(0.5)
+			.text("Agua de Hermosillo a:",50)
+			.moveDown(0.5);
+
+		myDoc.font("Times-Roman",12)
+			.text(fecha.format(new Date(), 'D-MMMM-YY'),75)
+			.moveDown(0.5);	
+
+		myDoc.font("Times-Roman",12)
+			.text(fecha.format(new Date(), 'hh:mm:ss A'),70)
+			.moveDown(0.5);	
+				
+		myDoc.font('Times-Roman',12)
+			.fontSize(48)
+ 			.text(imprimir,{
+				align: 'left'
+		});
+
+ 		myDoc.font('Times-Roman',12)
+			.text('Pago',45);
+
+		myDoc.font('Times-Roman',8)
+			.text('Recibo',45);
+
+		myDoc.end();
+	});
+	socket.on('pagoconvenio',function(imprimir){
+		console.log('Creando PDF: '+ imprimir);
+		
+		var myDoc = new pdf;
+		myDoc.pipe(fs.createWriteStream('node.pdf'));
+		
+		myDoc.font("Times-Roman",12)
+			.image('img/logo_aguaa.png',75,10,{
+				 width: 60, 
+				 height: 60
+			})
+
+			.moveDown(0.5)
+			.text("Agua de Hermosillo a:",50)
+			.moveDown(0.5);
+
+		myDoc.font("Times-Roman",12)
+			.text(fecha.format(new Date(), 'D-MMMM-YY'),75)
+			.moveDown(0.5);	
+
+		myDoc.font("Times-Roman",12)
+			.text(fecha.format(new Date(), 'hh:mm:ss A'),70)
+			.moveDown(0.5);	
+				
+		myDoc.font('Times-Roman',12)
+			.fontSize(48)
+ 			.text(imprimir,{
+				align: 'left'
+		});
+
+ 		myDoc.font('Times-Roman',12)
+			.text('Pago',45);
+
+		myDoc.font('Times-Roman',8)
+			.text('Convenio',45);
+
+		myDoc.end();
+	});
+	socket.on('pagocarta',function(imprimir){
+		console.log('Creando PDF: '+ imprimir);
+		
+		var myDoc = new pdf;
+		myDoc.pipe(fs.createWriteStream('node.pdf'));
+		
+		myDoc.font("Times-Roman",12)
+			.image('img/logo_aguaa.png',75,10,{
+				 width: 60, 
+				 height: 60
+			})
+
+			.moveDown(0.5)
+			.text("Agua de Hermosillo a:",50)
+			.moveDown(0.5);
+
+		myDoc.font("Times-Roman",12)
+			.text(fecha.format(new Date(), 'D-MMMM-YY'),75)
+			.moveDown(0.5);	
+
+		myDoc.font("Times-Roman",12)
+			.text(fecha.format(new Date(), 'hh:mm:ss A'),70)
+			.moveDown(0.5);	
+				
+		myDoc.font('Times-Roman',12)
+			.fontSize(48)
+ 			.text(imprimir,{
+				align: 'left'
+		});
+
+ 		myDoc.font('Times-Roman',12)
+			.text('Pago',45);
+
+		myDoc.font('Times-Roman',8)
+			.text('Carta de no adeudo',45);
+
+		myDoc.end();
+	});
+
+	/*tramites*/
 	socket.on('pdf',function(imprimir){
 		console.log('Creando PDF: '+ imprimir);
 		
